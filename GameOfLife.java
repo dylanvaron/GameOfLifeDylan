@@ -73,8 +73,8 @@ public class GameOfLife {
         //       Check bounds before reading society[r][c].
         int count = 0;
 
-        for (int r = Math.max(0, row-1); r <= Math.min(society.length, row+1); r++) {
-            for (int c = Math.max(0, col-1); c <= Math.min(society[0].length, col+1); c++) {
+        for (int r = Math.max(0, row-1); r <= Math.min(society.length-1, row+1); r++) {
+            for (int c = Math.max(0, col-1); c <= Math.min(society[0].length-1, col+1); c++) {
                 if(!(r == row && c == col)) { 
                     if (society[r][c] == true)
                         count++;
@@ -104,7 +104,24 @@ public class GameOfLife {
         // neighbors. Every cell in the new generation must be based on the
         // same old generation.
 
-        
+        boolean[][] newSociety = new boolean[society.length][society[0].length];
+
+        for (int r = 0; r < society.length; r++) {
+            for (int c = 0; c < society[0].length; c++) {
+                int neighbors = neighborCount(r, c);
+
+                if(neighbors < 2)
+                    newSociety[r][c] = false;
+                else if(neighbors > 3)
+                    newSociety[r][c] = false;
+                else if(society[r][c] == true && neighbors >= 2 && neighbors <=3)
+                    newSociety[r][c] = true;
+                else if(neighbors == 3)
+                    newSociety[r][c] = true;
+            }
+        }
+
+        society = newSociety;
     }
 
     /**
@@ -119,6 +136,18 @@ public class GameOfLife {
         // TODO: Use nested loops to build one String containing the board.
         //       Add a newline after every row.
 
-        return "Complete toString() to display the text version of the board.\n";
+        String board = "";
+
+        for (int r = 0; r < society.length; r++) {
+            for (int c = 0; c < society[0].length; c++) {
+                if(society[r][c] == true)
+                    board += "O";
+                else
+                    board += ".";
+            }
+            board +="\n";
+        }
+
+        return board;
     }
 }

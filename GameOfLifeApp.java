@@ -24,8 +24,8 @@ import javax.swing.Timer;
  */
 public class GameOfLifeApp extends JFrame {
 
-    private static final int ROWS = 15;
-    private static final int COLS = 25;
+    private static final int ROWS = 30;
+    private static final int COLS = 50;
     private static final int DELAY = 350;
 
     private final GameOfLife game;
