@@ -154,23 +154,10 @@ public class GameOfLifeApp extends JFrame {
     }
 
     private void stepGeneration() {
-        if (touchesWall()) {
-            stopAnimation();
-            statusLabel.setText("A live cell reached the wall. Animation stopped.");
-            return;
-        }
-
         game.update();
         generation++;
         refreshDisplay();
-
-        if (touchesWall()) {
-            stopAnimation();
-            statusLabel.setText("A live cell reached the wall. Animation stopped.");
-        }
-        else {
-            statusLabel.setText("Generation advanced.");
-        }
+        statusLabel.setText("Generation advanced.");
     }
 
     private void toggleAnimation() {
